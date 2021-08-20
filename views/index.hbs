@@ -1,2 +1,111 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<div class="container">
+    <main>
+        <div class="py-5 text-center">
+            <img class="d-block mx-auto mb-4" src="/images/rizek-logo.svg"
+                alt="" width="100" height="100">
+            <h2>TRIP SORTER</h2>
+            <p class="lead">Simple webApp to display the cheapest/fastest path</p>
+        </div>
+
+        <div class="row g-5 justify-content-md-center">
+            <div class="col-md-7 col-lg-8">
+                <h4 class="mb-3">Choose your places</h4>
+                <form action="/itinerary" method="POST" class="needs-validation" novalidate>
+                    <div class="row g-3">
+
+                        <div class="col-sm-6">
+                            <label for="departure" class="form-label">Departure</label>
+                            <select class="form-select" id="departure" name="departure" required>
+                                <option value="">From</option>
+                                {{#each departures}}
+                                <option value="{{this}}">{{this}}</option>
+                                {{/each}}
+                            </select>
+                            <div class="invalid-feedback">
+                                Please select a valid departure.
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label for="arrival" class="form-label">Arrival</label>
+                            <select class="form-select" id="arrival" name="arrival" required>
+                                <option value="">To</option>
+                                {{#each arrivals}}
+                                <option value="{{this}}">{{this}}</option>
+                                {{/each}}
+                            </select>
+                            <div class="invalid-feedback">
+                                Please provide a valid arrival.
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <hr class="my-4">
+
+                    <h4 class="mb-3">Select the best option</h4>
+
+                    <div class="my-3">
+                        <div class="form-check">
+                            <input id="cheapest" name="travelMethod" type="radio" class="form-check-input" checked
+                                required>
+                            <label class="form-check-label" for="credit">Cheapest</label>
+                        </div>
+                        <div class="form-check">
+                            <input id="fastest" name="travelMethod" type="radio" class="form-check-input" required>
+                            <label class="form-check-label" for="debit">Fastest</label>
+                        </div>
+                    </div>
+
+                    <button class="w-100 btn btn-primary btn-lg" type="submit">SEARCH</button>
+                </form>
+
+                <hr class="my-4">
+
+                {{#if showResults}}
+                <h2>Itinerary</h2>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">First</th>
+                                <th scope="col">Last</th>
+                                <th scope="col">Handle</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@mdo</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td>@fat</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td colspan="2">Larry the Bird</td>
+                                <td>@twitter</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                {{/if}}
+            </div>
+        </div>
+    </main>
+
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; 2021 RIZEK</p>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">Privacy</a></li>
+            <li class="list-inline-item"><a href="#">Terms</a></li>
+            <li class="list-inline-item"><a href="#">Support</a></li>
+        </ul>
+    </footer>
+</div>
