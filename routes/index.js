@@ -19,7 +19,7 @@ router.get('/', function (req, res, next) {
   );
 });
 
-router.post("/itinerary", function (req, res, next) {
+router.post("/", function (req, res, next) {
 
   const { departure, arrival, travelMethod } = req.body;
 
