@@ -8,7 +8,7 @@
 
         <div class="row g-5 justify-content-md-center">
             <div class="col-md-7 col-lg-8">
-                <h4 class="mb-3">Choose your places</h4>
+                <h4 class="mb-3">Choose your journey</h4>
                 <form action="/" method="POST" class="needs-validation" novalidate>
                     <div class="row g-3">
 
@@ -64,6 +64,7 @@
                 <hr class="my-4">
 
                 {{#if showResults}}
+                {{#if isRouteFound}}
                 <h2>Itinerary</h2>
                 <div class="table-responsive">
                     <table class="table">
@@ -99,6 +100,13 @@
                         </tbody>
                     </table>
                 </div>
+                {{/if}}
+                {{#unless isRouteFound}}
+                <h2>Oops!</h2>
+                <p>Sorry.
+                    We are not able to find a route for the selected journey. Please try selecting different
+                    locations</p>
+                {{/unless}}
                 {{/if}}
             </div>
         </div>

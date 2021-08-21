@@ -43,24 +43,29 @@ router.post("/", function (req, res, next) {
       }
     );
 
+  } else {
+
+    let results = travelMethod === 'cheapest' ? Graph.getCheapestRoute(departure, arrival) : Graph.getFastestRoute(departure, arrival);
+    let isRouteFound = results.itinerary.length > 0;
+    res.render('index', {
+      title: 'RIZEK - Trip Sorter',
+      departures: Graph.uniqueLocations,
+      arrivals: Graph.uniqueLocations,
+      showResults: true,
+      results,
+      isRouteFound,
+      helpers: {
+        setSelected: (selected, way) => {
+          if (way == 'departure')
+            return (selected == departure) ? 'selected="selected"' : '';
+          else
+            return (selected == arrival) ? 'selected="selected"' : '';
+        },
+        setChecked: (radioOption) => radioOption === travelMethod ? 'checked' : ''
+      }
+    });
   }
 
-  res.render('index', {
-    title: 'RIZEK - Trip Sorter',
-    departures: Graph.uniqueLocations,
-    arrivals: Graph.uniqueLocations,
-    showResults: true,
-    results: travelMethod === 'cheapest' ? Graph.getCheapestRoute(departure, arrival) : Graph.getFastestRoute(departure, arrival),
-    helpers: {
-      setSelected: (selected, way) => {
-        if (way == 'departure')
-          return (selected == departure) ? 'selected="selected"' : '';
-        else
-          return (selected == arrival) ? 'selected="selected"' : '';
-      },
-      setChecked: (radioOption) => radioOption === travelMethod ? 'checked' : ''
-    }
-  });
 });
 
 module.exports = router;
