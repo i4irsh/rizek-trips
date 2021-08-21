@@ -1,8 +1,7 @@
 <div class="container">
     <main>
         <div class="py-5 text-center">
-            <img class="d-block mx-auto mb-4" src="/images/rizek-logo.svg"
-                alt="" width="100" height="100">
+            <img class="d-block mx-auto mb-4" src="/images/rizek-logo.svg" alt="" width="100" height="100">
             <h2>TRIP SORTER</h2>
             <p class="lead">Simple webApp to display the cheapest/fastest path</p>
         </div>
@@ -18,7 +17,8 @@
                             <select class="form-select" id="departure" name="departure" required>
                                 <option value="">From</option>
                                 {{#each departures}}
-                                <option value="{{this}}">{{this}}</option>
+                                <option value="{{this}}">{{this}}
+                                </option>
                                 {{/each}}
                             </select>
                             <div class="invalid-feedback">
@@ -47,13 +47,14 @@
 
                     <div class="my-3">
                         <div class="form-check">
-                            <input id="cheapest" name="travelMethod" type="radio" class="form-check-input" checked
-                                required>
-                            <label class="form-check-label" for="credit">Cheapest</label>
+                            <input id="cheapest" name="travelMethod" type="radio" class="form-check-input"
+                                value="cheapest" checked required>
+                            <label class="form-check-label" for="cheapest">Cheapest</label>
                         </div>
                         <div class="form-check">
-                            <input id="fastest" name="travelMethod" type="radio" class="form-check-input" required>
-                            <label class="form-check-label" for="debit">Fastest</label>
+                            <input id="fastest" name="travelMethod" type="radio" class="form-check-input"
+                                value="fastest" required>
+                            <label class="form-check-label" for="fastest">Fastest</label>
                         </div>
                     </div>
 
@@ -68,30 +69,25 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Handle</th>
+                                <th scope="col">Departure</th>
+                                <th scope="col">Arrival</th>
+                                <th scope="col">Transport</th>
+                                <th scope="col">Reference</th>
+                                <th scope="col">Duration</th>
+                                <th scope="col">Cost</th>
                             </tr>
                         </thead>
                         <tbody>
+                            {{#each results.itinerary}}
                             <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
+                                <td>{{this.departure}}</td>
+                                <td>{{this.arrival}}</td>
+                                <td>{{this.transport}}</td>
+                                <td>{{this.reference}}</td>
+                                <td>{{this.durationInMin}}</td>
+                                <td>{{this.costWithDiscount}}</td>
                             </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td colspan="2">Larry the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
+                            {{/each}}
                         </tbody>
                     </table>
                 </div>
