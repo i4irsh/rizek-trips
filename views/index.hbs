@@ -2,10 +2,8 @@
     <main>
         <div class="py-5 text-center">
             <img class="d-block mx-auto mb-4" src="/images/rizek-logo.svg" alt="" width="100" height="100">
-            <h2>TRIP SORTER</h2>
-            <p>{{foo}}</p>
-
-            <p class="lead">Simple webApp to display the cheapest/fastest path</p>
+            {{!-- <h2>TRIP SORTER</h2> --}}
+            {{!-- <p class="lead">Simple webApp to display the cheapest/fastest path</p> --}}
         </div>
 
         <div class="row g-5 justify-content-md-center">
@@ -50,12 +48,12 @@
                     <div class="my-3">
                         <div class="form-check">
                             <input id="cheapest" name="travelMethod" type="radio" class="form-check-input"
-                                value="cheapest" checked required>
+                                value="cheapest" required {{{setChecked 'cheapest' }}}>
                             <label class="form-check-label" for="cheapest">Cheapest</label>
                         </div>
                         <div class="form-check">
                             <input id="fastest" name="travelMethod" type="radio" class="form-check-input"
-                                value="fastest" required>
+                                value="fastest" required {{{setChecked 'fastest' }}}>
                             <label class="form-check-label" for="fastest">Fastest</label>
                         </div>
                     </div>
@@ -86,13 +84,15 @@
                                 <td>{{this.arrival}}</td>
                                 <td>{{this.transport}}</td>
                                 <td>{{this.reference}}</td>
-                                <td>{{this.duration.h }}:{{this.duration.m }}</td>
+                                <td class="text-center">{{this.duration.h }}:{{this.duration.m }}</td>
                                 <td class="text-end">{{ this.costWithDiscount }} &#128;</td>
                             </tr>
                             {{/each}}
                             <tr class="table-secondary">
                                 <td scope="col" colspan="4"><strong>TOTAL</strong></td>
-                                <td scope="col"><strong>{{results.duration.h}}:{{results.duration.m}}</strong></td>
+                                <td scope="col" class="text-center">
+                                    <strong>{{results.duration.h}}:{{results.duration.m}}</strong>
+                                </td>
                                 <td scope="col" class="text-end"><strong>{{results.costWithDiscount}} &#128; </strong>
                                 </td>
                             </tr>

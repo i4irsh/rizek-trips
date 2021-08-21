@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-// const data = require('../data/response.json')
 const Graph = require('./graph');
 
 /* GET home page. */
@@ -13,9 +12,8 @@ router.get('/', function (req, res, next) {
       arrivals: Graph.uniqueLocations,
       showResults: false,
       helpers: {
-        setSelected: function (selected, way) {
-          return ''
-        }
+        setSelected: () => '',
+        setChecked: (radioOption) => radioOption == 'cheapest' ? 'checked' : ''
       }
     }
   );
@@ -32,12 +30,13 @@ router.post("/itinerary", function (req, res, next) {
     showResults: true,
     results: travelMethod === 'cheapest' ? Graph.getCheapestRoute(departure, arrival) : Graph.getFastestRoute(departure, arrival),
     helpers: {
-      setSelected: function (selected, way) {
+      setSelected: (selected, way) => {
         if (way == 'departure')
           return (selected == departure) ? 'selected="selected"' : '';
         else
           return (selected == arrival) ? 'selected="selected"' : '';
-      }
+      },
+      setChecked: (radioOption) => radioOption === travelMethod ? 'checked' : ''
     }
   });
 });
