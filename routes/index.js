@@ -11,27 +11,34 @@ router.get('/', function (req, res, next) {
       title: 'RIZEK - Trip Sorter',
       departures: Graph.uniqueLocations,
       arrivals: Graph.uniqueLocations,
-      selectedDeparture: '',
-      selectedArrival: '',
-      showResults: false
-    });
+      showResults: false,
+      helpers: {
+        setSelected: function (selected, way) {
+          return ''
+        }
+      }
+    }
+  );
 });
 
 router.post("/itinerary", function (req, res, next) {
 
-  console.log('BODY : ', JSON.stringify(req.body));
-
   const { departure, arrival, travelMethod } = req.body;
 
-  // console.log(Graph.getCheapestRoute("London", "Warsaw"));
   res.render('index', {
     title: 'RIZEK - Trip Sorter',
     departures: Graph.uniqueLocations,
     arrivals: Graph.uniqueLocations,
-    selectedDeparture: departure,
-    selectedArrival: arrival,
     showResults: true,
-    results: travelMethod === 'cheapest' ? Graph.getCheapestRoute(departure, arrival) : Graph.getFastestRoute(departure, arrival)
+    results: travelMethod === 'cheapest' ? Graph.getCheapestRoute(departure, arrival) : Graph.getFastestRoute(departure, arrival),
+    helpers: {
+      setSelected: function (selected, way) {
+        if (way == 'departure')
+          return (selected == departure) ? 'selected="selected"' : '';
+        else
+          return (selected == arrival) ? 'selected="selected"' : '';
+      }
+    }
   });
 });
 
