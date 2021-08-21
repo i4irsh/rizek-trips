@@ -56,9 +56,19 @@ class Graph {
             curr = previousLocation[curr].departure;
         }
 
+        let durationInMin = 0, costWithDiscount = 0, duration = {};
+        if (itinerary.length != 0) {
+            durationInMin = itinerary.reduce((totalDuration, { durationInMin }) => totalDuration + durationInMin, 0);
+            costWithDiscount = itinerary.reduce((totalCost, { costWithDiscount }) => totalCost + costWithDiscount, 0);
+            duration = {
+                h: String(Math.floor(durationInMin / 60)).padStart(2, '0'),
+                m: String(durationInMin % 60).padStart(2, '0')
+            }
+        }
+
         return {
-            durationInMin: itinerary.length != 0 ? itinerary.reduce((totalDuration, { durationInMin }) => totalDuration + durationInMin, 0) : 0,
-            costWithDiscount: itinerary.length != 0 ? itinerary.reduce((totalCost, { costWithDiscount }) => totalCost + costWithDiscount, 0) : 0,
+            duration,
+            costWithDiscount,
             itinerary: itinerary.reverse()
         }
     }

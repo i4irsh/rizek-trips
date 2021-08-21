@@ -86,10 +86,16 @@
                                 <td>{{this.arrival}}</td>
                                 <td>{{this.transport}}</td>
                                 <td>{{this.reference}}</td>
-                                <td>{{this.durationInMin}}</td>
-                                <td>{{this.costWithDiscount}}</td>
+                                <td>{{this.duration.h }}:{{this.duration.m }}</td>
+                                <td class="text-end">{{ this.costWithDiscount }} &#128;</td>
                             </tr>
                             {{/each}}
+                            <tr class="table-secondary">
+                                <td scope="col" colspan="4"><strong>TOTAL</strong></td>
+                                <td scope="col"><strong>{{results.duration.h}}:{{results.duration.m}}</strong></td>
+                                <td scope="col" class="text-end"><strong>{{results.costWithDiscount}} &#128; </strong>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
