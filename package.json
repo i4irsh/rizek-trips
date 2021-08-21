@@ -4,10 +4,9 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "start:dev": "DEBUG=pathfinder:* npm start"
+    "start:dev": "npm start"
   },
   "dependencies": {
-    "debug": "~2.6.9",
     "express": "~4.16.1",
     "express-handlebars": "^5.3.3",
     "hbs": "~4.0.4",
