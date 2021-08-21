@@ -22,6 +22,28 @@ router.get('/', function (req, res, next) {
 router.post("/", function (req, res, next) {
 
   const { departure, arrival, travelMethod } = req.body;
+  if (departure === arrival) {
+
+    res.render('index',
+      {
+        title: 'RIZEK - Trip Sorter',
+        departures: Graph.uniqueLocations,
+        arrivals: Graph.uniqueLocations,
+        showResults: false,
+        arrivalValidity: 'is-invalid',
+        helpers: {
+          setSelected: (selected, way) => {
+            if (way == 'departure')
+              return (selected == departure) ? 'selected="selected"' : '';
+            else
+              return (selected == arrival) ? 'selected="selected"' : '';
+          },
+          setChecked: (radioOption) => radioOption === travelMethod ? 'checked' : ''
+        }
+      }
+    );
+
+  }
 
   res.render('index', {
     title: 'RIZEK - Trip Sorter',

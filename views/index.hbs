@@ -28,7 +28,7 @@
 
                         <div class="col-sm-6">
                             <label for="arrival" class="form-label">Arrival</label>
-                            <select class="form-select" id="arrival" name="arrival" required>
+                            <select class="form-select {{ arrivalValidity }}" id="arrival" name="arrival" required>
                                 <option value="">To</option>
                                 {{#each arrivals}}
                                 <option value="{{this}}" {{{ setSelected this 'arrival' }}}>{{this}}</option>
@@ -47,13 +47,13 @@
 
                     <div class="my-3">
                         <div class="form-check">
-                            <input id="cheapest" name="travelMethod" type="radio" class="form-check-input"
-                                value="cheapest" required {{{setChecked 'cheapest' }}}>
+                            <input id="cheapest" name="travelMethod" type="radio" value="cheapest" required
+                                {{{setChecked 'cheapest' }}}>
                             <label class="form-check-label" for="cheapest">Cheapest</label>
                         </div>
                         <div class="form-check">
-                            <input id="fastest" name="travelMethod" type="radio" class="form-check-input"
-                                value="fastest" required {{{setChecked 'fastest' }}}>
+                            <input id="fastest" name="travelMethod" type="radio" value="fastest" required
+                                {{{setChecked 'fastest' }}}>
                             <label class="form-check-label" for="fastest">Fastest</label>
                         </div>
                     </div>
