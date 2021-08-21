@@ -1,4 +1,7 @@
-FROM node:12-slim
+FROM node:16-alpine
+
+# Set for production
+ENV NODE_ENV production
 
 # create a directory in your docker image
 WORKDIR /app
