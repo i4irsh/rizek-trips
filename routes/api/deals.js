@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Graph = require('./graph');
+const Graph = require('../../helpers/graph');
 
 router.get('/', function (req, res, next) {
     const { departure, arrival, travelMethod } = req.query;

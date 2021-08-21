@@ -1,13 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const Graph = require('./graph');
+const Graph = require('../helpers/graph');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
 
   res.render('index',
     {
-      title: 'RIZEK - Trip Sorter',
       departures: Graph.uniqueLocations,
       arrivals: Graph.uniqueLocations,
       showResults: false,
@@ -26,7 +25,6 @@ router.post("/", function (req, res, next) {
 
     res.render('index',
       {
-        title: 'RIZEK - Trip Sorter',
         departures: Graph.uniqueLocations,
         arrivals: Graph.uniqueLocations,
         showResults: false,
@@ -48,7 +46,6 @@ router.post("/", function (req, res, next) {
     let results = travelMethod === 'fastest' ? Graph.getFastestRoute(departure, arrival) : Graph.getCheapestRoute(departure, arrival);
     let isRouteFound = results.itinerary.length > 0;
     res.render('index', {
-      title: 'RIZEK - Trip Sorter',
       departures: Graph.uniqueLocations,
       arrivals: Graph.uniqueLocations,
       showResults: true,

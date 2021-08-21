@@ -1,5 +1,4 @@
-const fs = require("fs");
-const PriorityQueue = require('./priorityQ')
+const PriorityQueue = require('./priorityQueue')
 
 class Graph {
 
@@ -19,16 +18,7 @@ class Graph {
         }
     }
 
-    drawRoutes() {
-        for (const [departure, arrivals] of this.arrivalListFromDeparture) {
-            console.log('DEPARTURE FROM : ', departure);
-            // ({ arrival, transport, durationInMin, costWithDiscount }) => { arrival, transport, durationInMin, costWithDiscount })
-            console.log('ARRIVALS : ', arrivals.map(({ arrival, transport, durationInMin, costWithDiscount }) => ({ arrival, transport, durationInMin, costWithDiscount })));
-        }
-    }
-
-    // Reference: https://www.youtube.com/watch?v=pVfj6mxhdMw
-    shortestRoute(startLocation, endLocation, isDuration = false) {
+    bestRoute(startLocation, endLocation, isDuration = false) {
 
         let shortestWeight = {}, previousLocation = {};
         let notVisited = new PriorityQueue();
@@ -74,16 +64,15 @@ class Graph {
     }
 
     getFastestRoute(startLocation, endLocation) {
-        return this.shortestRoute(startLocation, endLocation, true)
+        return this.bestRoute(startLocation, endLocation, true)
     }
 
     getCheapestRoute(startLocation, endLocation) {
-        return this.shortestRoute(startLocation, endLocation, false)
+        return this.bestRoute(startLocation, endLocation, false)
     }
 
 
 }
 
-// export default new Graph();
 module.exports = new Graph();
 

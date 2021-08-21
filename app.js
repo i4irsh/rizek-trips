@@ -8,7 +8,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
-const apiDealsRouter = require('./routes/deals');
+const apiDealsRouter = require('./routes/api/deals');
 
 const app = express();
 
