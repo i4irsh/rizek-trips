@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "start:dev": "npm start"
+    "start:dev": "npm start",
+    "start:docker": "docker stop pathfinder || true && docker rm pathfinder || true && docker build -t pathfinder . && docker run -p 3000:3000 --name pathfinder -itd pathfinder"
   },
   "dependencies": {
     "express": "~4.16.1",
