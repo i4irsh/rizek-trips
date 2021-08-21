@@ -45,7 +45,7 @@ router.post("/", function (req, res, next) {
 
   } else {
 
-    let results = travelMethod === 'cheapest' ? Graph.getCheapestRoute(departure, arrival) : Graph.getFastestRoute(departure, arrival);
+    let results = travelMethod === 'fastest' ? Graph.getFastestRoute(departure, arrival) : Graph.getCheapestRoute(departure, arrival);
     let isRouteFound = results.itinerary.length > 0;
     res.render('index', {
       title: 'RIZEK - Trip Sorter',

@@ -1,0 +1,147 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a simple webapp API to find cheapest or faster route",
+        "version": "1.0.0",
+        "title": "RIZEK Trips",
+        "contact": {
+            "email": "i4irsh@gmail.com"
+        }
+    },
+    "host": "localhost:3000",
+    "basePath": "/api",
+    "tags": [
+        {
+            "name": "deals",
+            "description": "Find best deals to travel between cities"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/deals": {
+            "get": {
+                "tags": [
+                    "deals"
+                ],
+                "summary": "Finds best deals",
+                "description": "Find the best deals between cities sorted by cost or duration",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "departure",
+                        "in": "query",
+                        "description": "Source location",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "arrival",
+                        "in": "query",
+                        "description": "Destination location",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "travelMethod",
+                        "in": "query",
+                        "description": "Preferred method of travel",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "cheapest",
+                            "fastest"
+                        ],
+                        "default": "cheapest"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Deals"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Deals": {
+            "type": "object",
+            "properties": {
+                "duration": {
+                    "type": "object",
+                    "properties": {
+                        "h": {
+                            "type": "string"
+                        },
+                        "m": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "costWithDiscount": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "itinerary": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "transport": {
+                                "type": "string"
+                            },
+                            "departure": {
+                                "type": "string"
+                            },
+                            "arrival": {
+                                "type": "string"
+                            },
+                            "duration": {
+                                "type": "object",
+                                "properties": {
+                                    "h": {
+                                        "type": "string"
+                                    },
+                                    "m": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "cost": {
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "discount": {
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "reference": {
+                                "type": "string"
+                            },
+                            "durationInMin": {
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "costWithDiscount": {
+                                "type": "integer",
+                                "format": "int32"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
