@@ -1,19 +1,19 @@
 class PriorityQueue {
-    constructor() {
-        this.locations = [];
-    }
+
+    #locations = [];
+
     enqueue(location, weight) {
-        this.locations.push({ location, weight });
+        this.#locations.push({ location, weight });
         this.sort();
     }
     dequeue() {
-        return this.locations.shift();
+        return this.#locations.shift();
     }
     hasValue() {
-        return this.locations.length !== 0;
+        return this.#locations.length !== 0;
     }
     sort() {
-        this.locations.sort((a, b) => a.weight - b.weight);
+        this.#locations.sort((a, b) => a.weight - b.weight);
     }
 }
 

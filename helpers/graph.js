@@ -2,36 +2,43 @@ const PriorityQueue = require('./priorityQueue')
 
 class Graph {
 
+    // Private members
+    #data = require('../data/response.json');
+    #arrivalListFromDeparture = new Map();
+    #allUniqueLocations = [];
+
     constructor() {
-        this.data = require('../data/response.json');
-        this.data.deals.map(deal => {
+        this.#data.deals.map(deal => {
             deal.durationInMin = (parseInt(deal.duration.h) * 60) + parseInt(deal.duration.m);
             deal.costWithDiscount = deal.cost - (deal.cost * deal.discount / 100);
         })
 
-        this.arrivalListFromDeparture = new Map();
-        // Find all UNIQUE locations..
-        this.uniqueLocations = [...new Set(this.data.deals.map(d => [d.departure, d.arrival]).flat())];
-        for (const departure of this.uniqueLocations) {
+        // Find all locations..
+        this.#allUniqueLocations = [...new Set(this.#data.deals.map(d => [d.departure, d.arrival]).flat())];
+        for (const departure of this.#allUniqueLocations) {
             // find all destinations from departure.
-            this.arrivalListFromDeparture.set(departure, this.data.deals.filter(d => d.departure == departure));
+            this.#arrivalListFromDeparture.set(departure, this.#data.deals.filter(d => d.departure == departure));
         }
     }
 
-    bestRoute(startLocation, endLocation, isDuration = false) {
+    get allUniqueLocations() {
+        return this.#allUniqueLocations;
+    }
+
+    bestRoute(startLocation, endLocation, checkFastest = false) {
 
         let shortestWeight = {}, previousLocation = {};
         let notVisited = new PriorityQueue();
-        for (const [departure] of this.arrivalListFromDeparture) {
+        for (const [departure] of this.#arrivalListFromDeparture) {
             shortestWeight[departure] = (departure == startLocation) ? 0 : Infinity;
             notVisited.enqueue(departure, shortestWeight[departure]);
         }
 
         while (notVisited.hasValue()) {
             let current = notVisited.dequeue();
-            for (let arrivalFromCurrentLocation of this.arrivalListFromDeparture.get(current.location)) {
-                let whichWeight = isDuration ? 'durationInMin' : 'costWithDiscount';
-                let newShortestWeight = shortestWeight[current.location] + arrivalFromCurrentLocation[whichWeight];
+            for (let arrivalFromCurrentLocation of this.#arrivalListFromDeparture.get(current.location)) {
+                let selectedWeight = checkFastest ? 'durationInMin' : 'costWithDiscount';
+                let newShortestWeight = shortestWeight[current.location] + arrivalFromCurrentLocation[selectedWeight];
                 if (newShortestWeight < shortestWeight[arrivalFromCurrentLocation.arrival]) {
                     shortestWeight[arrivalFromCurrentLocation.arrival] = newShortestWeight;
                     previousLocation[arrivalFromCurrentLocation.arrival] = arrivalFromCurrentLocation;
@@ -39,6 +46,7 @@ class Graph {
             }
         }
 
+        // Backtrace over previousLocation to find connected paths
         let curr = endLocation;
         let itinerary = [];
         while (curr != startLocation && previousLocation[curr]) {

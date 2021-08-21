@@ -7,8 +7,8 @@ router.get('/', function (req, res, next) {
 
   res.render('index',
     {
-      departures: Graph.uniqueLocations,
-      arrivals: Graph.uniqueLocations,
+      departures: Graph.allUniqueLocations,
+      arrivals: Graph.allUniqueLocations,
       showResults: false,
       helpers: {
         setSelected: () => '',
@@ -25,8 +25,8 @@ router.post("/", function (req, res, next) {
 
     res.render('index',
       {
-        departures: Graph.uniqueLocations,
-        arrivals: Graph.uniqueLocations,
+        departures: Graph.allUniqueLocations,
+        arrivals: Graph.allUniqueLocations,
         showResults: false,
         arrivalValidity: 'is-invalid',
         helpers: {
@@ -46,8 +46,8 @@ router.post("/", function (req, res, next) {
     let results = travelMethod === 'fastest' ? Graph.getFastestRoute(departure, arrival) : Graph.getCheapestRoute(departure, arrival);
     let isRouteFound = results.itinerary.length > 0;
     res.render('index', {
-      departures: Graph.uniqueLocations,
-      arrivals: Graph.uniqueLocations,
+      departures: Graph.allUniqueLocations,
+      arrivals: Graph.allUniqueLocations,
       showResults: true,
       results,
       isRouteFound,
