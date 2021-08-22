@@ -1,6 +1,6 @@
 const PriorityQueue = require('./priorityQueue')
 
-class Graph {
+class LocationsGraph {
 
     // Private members
     #data = require('../data/response.json');
@@ -82,5 +82,5 @@ class Graph {
 
 }
 
-module.exports = new Graph();
+module.exports = new LocationsGraph();
 

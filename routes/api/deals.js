@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const Graph = require('../../helpers/graph');
+const LocationsGraph = require('../../helpers/locationsGraph');
 
 router.get('/', function (req, res, next) {
     const { departure, arrival, travelMethod } = req.query;
-    let results = travelMethod === 'fastest' ? Graph.getFastestRoute(departure, arrival) : Graph.getCheapestRoute(departure, arrival);
+    let results = travelMethod === 'fastest' ? LocationsGraph.getFastestRoute(departure, arrival) : LocationsGraph.getCheapestRoute(departure, arrival);
     res.json(results);
 });
 

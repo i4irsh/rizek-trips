@@ -1,14 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const Graph = require('../helpers/graph');
+const LocationsGraph = require('../helpers/locationsGraph');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
 
   res.render('index',
     {
-      departures: Graph.allUniqueLocations,
-      arrivals: Graph.allUniqueLocations,
+      departures: LocationsGraph.allUniqueLocations,
+      arrivals: LocationsGraph.allUniqueLocations,
       showResults: false,
       helpers: {
         setSelected: () => '',
@@ -25,8 +25,8 @@ router.post("/", function (req, res, next) {
 
     res.render('index',
       {
-        departures: Graph.allUniqueLocations,
-        arrivals: Graph.allUniqueLocations,
+        departures: LocationsGraph.allUniqueLocations,
+        arrivals: LocationsGraph.allUniqueLocations,
         showResults: false,
         arrivalValidity: 'is-invalid',
         helpers: {
@@ -43,11 +43,11 @@ router.post("/", function (req, res, next) {
 
   } else {
 
-    let results = travelMethod === 'fastest' ? Graph.getFastestRoute(departure, arrival) : Graph.getCheapestRoute(departure, arrival);
+    let results = travelMethod === 'fastest' ? LocationsGraph.getFastestRoute(departure, arrival) : LocationsGraph.getCheapestRoute(departure, arrival);
     let isRouteFound = results.itinerary.length > 0;
     res.render('index', {
-      departures: Graph.allUniqueLocations,
-      arrivals: Graph.allUniqueLocations,
+      departures: LocationsGraph.allUniqueLocations,
+      arrivals: LocationsGraph.allUniqueLocations,
       showResults: true,
       results,
       isRouteFound,

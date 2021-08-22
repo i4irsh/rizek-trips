@@ -23,6 +23,12 @@ npm run start:dev
 npm run start:docker
 ```
 
+> To run unit tests:
+
+```
+npm run test
+```
+
 ## Links
 
 UI: [http://localhost:3000/](http://localhost:3000/)

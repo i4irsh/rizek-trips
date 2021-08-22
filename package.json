@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node ./bin/www",
     "start:dev": "npm start",
-    "start:docker": "docker stop pathfinder || true && docker rm pathfinder || true && docker build -t pathfinder . && docker run -p 3000:3000 --name pathfinder -itd pathfinder"
+    "start:docker": "docker stop pathfinder || true && docker rm pathfinder || true && docker build -t pathfinder . && docker run -p 3000:3000 --name pathfinder -itd pathfinder",
+    "test": "jest"
   },
   "dependencies": {
     "express": "~4.16.1",
@@ -14,5 +15,8 @@
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
     "swagger-ui-express": "^4.1.6"
+  },
+  "devDependencies": {
+    "jest": "^27.0.6"
   }
 }
